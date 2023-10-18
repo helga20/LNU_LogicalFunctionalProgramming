@@ -1,0 +1,118 @@
+% 1. Перший елемент списку
+first_element([Head|_], Head).
+% first_element([1, 2, 3, 4], X).
+
+
+% 2. Останній елемент списку
+last_element([Head|[]], Head).
+last_element([_|Tail], LastElement):- last_element(Tail, LastElement).
+% last_element([1, 2, 3, 4], X).
+
+
+% 3. n-ий елемент списку
+n_list_element([Head|_], 0, Head).
+n_list_element([_|Tail], N, Element):- 
+    K is N - 1, 
+    n_list_element(Tail, K, Element).
+%  n_list_element([1, 2, 3, 4, 5], 2, X).
+
+
+% 4. Сума елементів списку
+elements_sum([Head], Head).
+elements_sum([Head|Tail], Sum):-
+	elements_sum(Tail, TailSum), Sum is TailSum+Head.
+% elements_sum([1, 2, 3, 4, 5], X).
+
+
+% 5. Добуток елементів списку
+elements_multiplication([Head], Head).
+elements_multiplication([Head|Tail], Product):-
+	elements_multiplication(Tail, TailProduct), Product is TailProduct*Head.
+% elements_multiplication([1, 2, 3, 4, 5], X).
+
+
+% 6. Підсписок
+concat([], List, List).
+concat([Head|Tail], SecondList, [Head|ResultList]):- 
+    concat(Tail, SecondList, ResultList).
+
+sublist(SubList, List):- 
+    concat(_, SecondList, List), 
+    concat(SubList, _, SecondList).
+% sublist([2, 3], [1, 2, 3, 4, 5]).
+
+
+% 7. Перестановка
+insert(X, Tail, [X|Tail]).
+insert(X, [Y|Tail], [Y|SecondTail]):- 
+    insert(X, Tail, SecondTail).
+
+permutation([], []).
+permutation([Head|Tail], Permutated) :- 
+    permutation(Tail, TempList), 
+    insert(Head, TempList, Permutated).
+% permutation([1, 2, 3], Permutated).
+
+
+% 8. Обернений список
+reverse([], []).
+reverse([Head|Tail], Reversed):- 
+    reverse(Tail, Rev), 
+    concat(Rev, [Head], Reversed).
+% reverse([1, 2, 3, 4, 5], Reversed).
+
+
+% 9. Паліндром
+is_palindrome(L):- 
+    reverse(L, L).
+% is_palindrome([1, 2, 3, 2, 1]).
+% is_palindrome([п, и, л, и, п]).
+
+
+% 10. Зсув на одну позицію вліво
+shift([Head|Tail], Shifted):- 
+    concat(Tail, [Head], Shifted).
+% shift([1, 2, 3, 4, 5], Shifted).
+
+
+% 11. Об'єднання у лінійний список
+linearize([Head|Tail], ResList):- 
+    linearize(Head, LinHead), 
+    linearize(Tail, LinTail), 
+    concat(LinHead, LinTail, ResList), !.
+linearize([], []):- !.
+linearize(El, [El]).
+% linearize([1, [2, 3], [4, [5]]], LinList).
+
+
+% 12. Вставка елемента у впорядкований список
+insert_in_sorted(El, [], [El|[]]).
+insert_in_sorted(El, [Head|Tail], [El, Head|Tail]):-
+    El < Head, !.
+insert_in_sorted(El, [Head|Tail], [Head |LongerTail]):- 
+    insert_in_sorted(El, Tail, LongerTail).
+% insert_in_sorted(3, [1, 2, 4, 5], SortedList).
+
+
+% 13. Впорядкування елементів числового списку
+mysort([],[]).
+mysort([Head|[]], [Head|[]]).
+mysort([Head|Tail], List):- 
+    mysort(Tail, SortedT), 
+    insert_in_sorted(Head, SortedT, List).
+% mysort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5], SortedList).
+
+% 14. Перетворення списку на множину
+contains(Head, [Head|_]).
+contains(Head, [_|Tail]) :- contains(Head, Tail).
+
+distinct([], [], _).
+distinct([Head|Tail], [Head|Res], List) :- 
+    not(contains(Head, List)), 
+    distinct(Tail, Res, [Head|List]).
+distinct([Head|Tail], Res, List) :- 
+    contains(Head, List), 
+    distinct(Tail, Res, List).
+
+set(List, Set) :- distinct(List, Set, []).
+% set([1, 2, 3, 2, 4, 5], Set).

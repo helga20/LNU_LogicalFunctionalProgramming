@@ -1,0 +1,84 @@
+task_variable(knight).
+task_variable(knave).
+
+say(knight, Statement):-Statement. 
+say(knave, Statement):-not(Statement). 
+
+create([Head|[]]):- task_variable(Head).
+
+create([Head|Tail]):- task_variable(Head), 
+    create(Tail).
+
+
+% Приклад 1: Є два мешканці А і В.
+%            A сказав: "Я брехун або В - лицар."
+
+exercise(1, [A, B]) :- create([A, B]),
+    	say(A, (A=knave);(B=knight)).
+
+
+% Приклад 2: A сказав: "Я брехун, але B - ні."
+
+exercise(2, [A,B]) :-  create([A, B]),
+        say(A, ((A=knave),(B=knight))).
+
+
+% Приклад 3: A сказав: "Хоч один з нас брехун."
+
+exercise(3, [A,B]) :-
+     create([A,B]),
+        say(A, ((A=knave);(B=knave))).
+
+
+% Приклад 4: 3 мешканці. A сказав: "Всі ми брехуни."
+%            B сказав: "Лише один з нас лицар."
+
+exercise(4, [A,B,C]) :-create([A,B,C]),
+        say(A, ((A=knave),(B=knave),(C=knave))),
+    	say(B, ((A=knight),(B=knave),(C=knave));
+             ((A=knave),(B=knight),(C=knave));
+             ((A=knave),(B=knave),(C=knight))).
+
+
+% Приклад 5: A сказав: "B брехун."
+%            B сказав: "A і C є одного виду."
+
+exercise(5, [A,B,C]) :-create([A,B,C]),
+    say(A, (B=knave)), 
+    say(B, (A=C)).
+
+
+% Приклад 6: B сказав: "A сказав, що A - брехун."
+%            C сказав: "B – брехун."
+
+exercise(6, [A,B,C]) :-create([A,B,C]),
+    say(B, say(A, A=knave)), 
+    say(C,B=knave). 
+
+% Приклад 7: 3 мешканці. А відповів але ви не почули відповідь.
+%			 B сказав: "A сказав, що він - брехун."
+%            C сказав: "Це неправда. А сказав, що він лицар. Але А збрехав."
+
+exercise(7, [A,B,C]) :-create([A,B,C]),
+    say(B, say(A, A=knave)),
+    say(C,(say(A, A=knight), A=knave)). 
+
+
+% Приклад 8: Є багато людей. кожен з них сказав: "Принаймні Х з нас є брехуни."
+
+check_statements(Statements, Solution) :-
+    length(Statements, N),
+    length(Solution, N),
+    create(Solution),
+    include(==(knave), Solution, Knaves),
+    length(Knaves, N_knaves),
+    validate_lst(N_knaves, Statements, Solution).
+
+validate_lst(N_knaves, [SHead|[]], [knight|[]]):-SHead =< N_knaves. 
+validate_lst(N_knaves, [SHead|Stail], [knight|ResTail]):- 
+    SHead =< N_knaves, 
+    validate_lst(N_knaves, Stail, ResTail).
+validate_lst(N_knaves, [SHead|[]], [knave|[]]):- (SHead >= N_knaves). 
+validate_lst(N_knaves, [SHead|Stail], [knave|ResTail]):- 
+    SHead > N_knaves, 
+    validate_lst(N_knaves, Stail, ResTail).

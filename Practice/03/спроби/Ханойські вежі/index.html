@@ -1,0 +1,90 @@
+<script id="knight.pl" type="text/prolog">
+    :- use_module(library(dom)).
+    :- use_module(library(lists)).
+    :- use_module(library(os)).
+    
+    % mov/2
+    mov(1, 2). mov(1, -2). mov(-1, 2). mov(-1, -2).
+    mov(2, 1). mov(2, -1). mov(-2, 1). mov(-2, -1).
+    
+    % jump/2
+    jump((X0,Y0), (X1,Y1)) :-
+        mov(X,Y),
+        X1 is X0+X,
+        Y1 is Y0+Y,
+        X1 >= 1, X1 =< 8,
+        Y1 >= 1, Y1 =< 8.
+    
+    % tour/2
+    tour(Init, Tour) :-
+        tour(Init, [], 1, Tour).
+    
+    % tour/4
+    tour(Position, Visited, N, Tour) :-
+        sleep(250),
+        succ(N, M),
+        fill_square(Position, N),
+        jump(Position, Next),
+        \+(member(Next, Visited)),
+        fill_square(Next, '♞'),
+        ( tour(Next, [Position|Visited], M, Tour)
+        ; fill_square(Next, ''),
+          sleep(250),
+          fail
+        ).
+    
+    % fill_square/2
+    fill_square((Row, Col), Content) :-
+        atomic_list_concat([col, Row, Col], Id),
+        get_by_id(Id, Square),
+        set_html(Square, Content).
+    </script>
+    
+    <style type="text/css">
+    #table {
+        font-size: 20px;
+        margin: 0px auto;
+        height: 400px;
+        width: 400px;
+        text-align: center;
+    }
+    
+    #table > div {
+        overflow: hidden;
+        width: 400px;
+    }
+    
+    #table > div:nth-child(even) > div:nth-child(odd), #table > div:nth-child(odd) > div:nth-child(even) {
+        background-color: #f0d9b5;
+        color: #b58863;
+    }
+    
+    #table > div:nth-child(even) > div:nth-child(even), #table > div:nth-child(odd) > div:nth-child(odd) {
+        background-color: #b58863;
+        color: #f0d9b5;
+    }
+    
+    #table > div > div {
+        float: left;
+        height: 50px;
+        width: 50px;
+    }
+    </style>
+    
+    <div id="table">
+        <div id="row1"><div class="col" id="col11"></div><div class="col" id="col12"></div><div class="col" id="col13"></div><div class="col" id="col14"></div><div class="col" id="col15"></div><div class="col" id="col16"></div><div class="col" id="col17"></div><div class="col" id="col18"></div></div>
+        <div id="row2"><div class="col" id="col21"></div><div class="col" id="col22"></div><div class="col" id="col23"></div><div class="col" id="col24"></div><div class="col" id="col25"></div><div class="col" id="col26"></div><div class="col" id="col27"></div><div class="col" id="col28"></div></div>
+        <div id="row3"><div class="col" id="col31"></div><div class="col" id="col32"></div><div class="col" id="col33"></div><div class="col" id="col34"></div><div class="col" id="col35"></div><div class="col" id="col36"></div><div class="col" id="col37"></div><div class="col" id="col38"></div></div>
+        <div id="row4"><div class="col" id="col41"></div><div class="col" id="col42"></div><div class="col" id="col43"></div><div class="col" id="col44"></div><div class="col" id="col45"></div><div class="col" id="col46"></div><div class="col" id="col47"></div><div class="col" id="col48"></div></div>
+        <div id="row5"><div class="col" id="col51"></div><div class="col" id="col52"></div><div class="col" id="col53"></div><div class="col" id="col54"></div><div class="col" id="col55"></div><div class="col" id="col56"></div><div class="col" id="col57"></div><div class="col" id="col58"></div></div>
+        <div id="row6"><div class="col" id="col61"></div><div class="col" id="col62"></div><div class="col" id="col63"></div><div class="col" id="col64"></div><div class="col" id="col65"></div><div class="col" id="col66"></div><div class="col" id="col67"></div><div class="col" id="col68"></div></div>
+        <div id="row7"><div class="col" id="col71"></div><div class="col" id="col72"></div><div class="col" id="col73"></div><div class="col" id="col74"></div><div class="col" id="col75"></div><div class="col" id="col76"></div><div class="col" id="col77"></div><div class="col" id="col78"></div></div>
+        <div id="row8"><div class="col" id="col81"></div><div class="col" id="col82"></div><div class="col" id="col83"></div><div class="col" id="col84"></div><div class="col" id="col85"></div><div class="col" id="col86"></div><div class="col" id="col87"></div><div class="col" id="col88"></div></div>
+    </div>
+    
+    <script type="text/javascript">
+    var session = pl.create();
+    session.consult("knight.pl");
+    session.query("tour((1,1), _).");
+    session.answer(function(x){console.log(pl.format_answer(x));});
+    </script>

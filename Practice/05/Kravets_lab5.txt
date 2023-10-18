@@ -1,0 +1,168 @@
+(defun PUT (SYMBOL KEY VALUE)
+(SETF (GET SYMBOL KEY) VALUE))
+
+
+(PUT 'me 'name 'Olia)
+(PUT 'me 'surname 'Kravets)
+(PUT 'me 'occupation 'student)
+(PUT 'me 'age 20)
+(PUT 'me 'birthday '(19 07 2003))
+(PUT 'me 'university "Ivan Franko National University of Lviv")
+(PUT 'me 'group '(PMO 41)
+)
+(PUT 'me 'tehnologystack (CONS 'c++ '(python csharp java prolog)))
+
+
+(defun name (SYMBOL)
+(GET SYMBOL 'name))
+
+(defun surname (SYMBOL)
+(GET SYMBOL 'surname))
+
+(defun birthday (SYMBOL)
+(GET SYMBOL 'birthday))
+
+(defun birthdayMonth (SYMBOL)
+(CAR (CDR (GET SYMBOL 'birthday))))
+
+(defun birthdayYear (SYMBOL)
+(CAR (CDR (CDR (GET SYMBOL 'BIRTHDAY)))))
+
+(defun age (SYMBOL)
+(GET SYMBOL 'age))
+
+(defun occupation (SYMBOL)
+(GET SYMBOL 'occupation))
+
+(defun university (SYMBOL)
+(GET SYMBOL 'university))
+
+(defun studyYear (SYMBOL)
+(floor (CAR(CDR (GET SYMBOL 'group))) 10))
+
+(defun group (SYMBOL)
+(GET SYMBOL 'group))
+
+(defun tehnologystack (SYMBOL)
+(GET SYMBOL 'tehnologystack))
+
+
+(print (name 'me))
+(print (surname 'me))
+(print (birthday 'me))
+(print (birthdayMonth 'me))
+(print (birthdayYear 'me))
+(print (age 'me))
+(print (occupation 'me))
+(print (university 'me))
+(print (studyYear 'me))
+(print (group 'me))
+(print (tehnologystack 'me))
+
+(format t "~%")
+(format t "~%")
+(print '********************************************)
+(format t "~%")
+
+;З практичної
+
+;1. Побудувати список, який задовільняє наступним умовам:
+;а) містить два підсписки, перший з яких має три атоми, а другий – чотири атоми;
+(print '((1 2 3) (a b c d)))
+
+;б) містить три атоми, але його хвіст дорівнює NIL;
+(print '(1 2 3 . nil))
+
+;в) містить три складені об’єкти, і лише його другий елемент є атомом;
+(print '( (1 2 3) 4 (a b c) ))
+
+;г) голова списку містить три атоми, а кількість атомів в усьому списку дорівнює 3.
+(print '(1 2 3))
+
+;д) містить тільки порожній список, а голова списку не є атомом.
+(print '(() . 1))
+
+;е) голова та хвіст є списками з підсписками.
+(print '(((1 2 3) (4 5 6)) ((a b) (c d))))
+
+(print '------------------------------------------)
+
+;2. Що буде в результаті обчислення наступних виразів:
+;a) (CONS NIL NIL) 
+(print (CONS NIL NIL))
+
+;б) (CONS (CAR '((q w))) (CDR '((q (w e))))) 
+(print (CONS (CAR '((q w))) (CDR '((q (w e))))))
+
+;в) (EQL (CDR '(q)) NIL) 
+(print (EQL (CDR '(q)) NIL))
+
+;г) (ATOM (CDR '(q NIL)))
+(print (ATOM (CDR '(q NIL))))
+
+;д) (EQL NIL 'NIL)
+(print (EQL NIL 'NIL))
+
+;е) (PUSH nil nil) (EQL (ATOM '(q w)) nil)
+(format t "~A ~A~%" '(PUSH nil nil) (eql (atom '(q w)) nil))
+
+(print '------------------------------------------)
+
+;3. Скласти вираз, який би за вхідними даними побудував би заданий результат.
+;a) дано: (A, B, C), (X, Y, Z). побудувати: (A, Y, Z).
+(print (CONS (CAR '(A B C)) (CDR '(X Y Z))))
+
+;б) дано: ((one 1) (two 2 3) (three 4 5 6)) побудувати: 5.
+(print (CADDR (CADDR '((one 1) (two 2 3) (three 4 5 6)))))
+
+;в) дано: ((q w (r) t) y) побудувати: NIL
+(print (CADR (CAR '((q w (r) t) y))))
+
+;г) дано: ((q (w (e) r) t) y) побудувати: ((q) w (e) r)
+(print (CONS (LIST (CAR (CAR '((q (w (e) r) t) y)))) (CADR (CAR '((q (w (e) r) t) y)))))
+
+;д) дано: (q (w e)) побудувати: w, e
+(print (LIST (CADR '(q (w e)))))
+
+;е) дано: (q w) побудувати: (((q w)))
+(print (LIST (LIST '(q w))))
+
+(print '------------------------------------------)
+
+;4. Скласти вираз, який надає значення вхідним даним та вираз, який будує заданий результат, використовуючи лише вихідні символи.
+;а) дано: one=1, two=2, three=3 зробити: one=2, two=3, three=1.
+(SETQ one 1 two 2 three 3) 
+(SETQ one 2 two 3 three 1) 
+
+(print one) 
+(print two) 
+(print three) 
+(print '---)
+
+;б) дано: Val(house)=sky, Val(sky)=house зробити: Val(sky)=sky, Val(house)=house
+(SETQ sky 'sky house 'house)
+
+(print sky) 
+(print house) 
+(print '---)
+(format t "~%")
+
+;в) дано: Val(lst)=(q) зробити: Val(lst)=(((q) q) q)
+(SETQ lst '(((q) q) q))
+(format t "~a~%" lst)
+(print '---)
+
+;г) дано: Val(q)=w, Val(w)=s зробити: Val(q)=(s s)
+(SETQ q '(s s))
+(print q)
+
+(print '------------------------------------------)
+
+
+;5. Не використовуючи селекторні функції:
+;а) дано: Val(a) = (q w e r t y) зробити: Val(a) = q
+(SETQ a (QUOTE q))
+(print a)
+
+(print '------------------------------------------)
+

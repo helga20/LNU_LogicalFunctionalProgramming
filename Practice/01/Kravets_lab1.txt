@@ -1,0 +1,273 @@
+/* Facts */
+% male(x) :- x is a man
+male(andriy_fulmes).
+male(ivan_fulmes).
+male(ivan_loza).
+male(mykhailo_loza).
+male(yuri_loza).
+
+male(stepan_loza).
+male(vitaly_dilnyi).
+male(stepan2_loza).
+male(artem_loza).
+male(dmytro_loza).
+male(oleh_loza).
+
+male(vasyl_luhovsly).
+male(dmytro_klishevsky).
+male(volodymyr_klishevsky).
+male(yuri_luhovsky).
+male(demian_luhovsky).
+male(kostiantyn_luhovsky).
+
+male(ahafiy_kravets).
+male(andriy2_fulmes).
+male(myacheslav_kravets).
+male(bohdan_kravets).
+
+male(ivan_kravets).
+male(yuri_lahuniak).
+male(roman_lahuniak).
+
+male(ihor_kobyk).
+male(ivan_kobyk).
+
+male(ivan_konanets).
+male(taras_konanets).
+male(roman_konanets).
+
+% female(x) - x is a woman
+female(anna_fulmes).
+female(maria_loza).
+female(maria2_loza).
+
+female(olha_loza).
+female(svitlana_dilna).
+female(vira_dilna).
+female(olha_dilna).
+female(diana_dilna).
+
+female(maria3_loza).
+
+female(svitlana_luhovska).
+female(natalia_klishevska).
+female(natalia2_klishevska).
+female(tetiana_luhovska).
+
+female(stephania_fulmes).
+
+female(maria_kravets).
+female(anna2_fulmes).
+female(sofia_kravets).
+female(liubov_kravets).
+female(maria2_kravets).
+female(olha_kravets).
+
+female(halyna_kravets).
+female(iryna_lahuniak).
+
+female(maria_kobyk).
+
+female(oksana_konanets).
+
+% married(x, y) :- x and y are married
+married(andriy_fulmes, anna_fulmes).
+married(ivan_loza, maria_loza).
+married(mykhailo_loza, maria2_loza).
+married(stepan_loza, olha_loza).
+married(vitaly_dilnyi, svitlana_dilna).
+married(stepan2_loza, maria3_loza).
+married(vasyl_luhovsly, svitlana_luhovska).
+married(dmytro_klishevsky, natalia_klishevska).
+married(yuri_luhovsky, tetiana_luhovska).
+
+married(ahafiy_kravets, maria_kravets).
+married(andriy2_fulmes, anna2_fulmes).
+married(myacheslav_kravets, sofia_kravets).
+married(bohdan_kravets, liubov_kravets).
+married(ivan_kravets, halyna_kravets).
+
+married(yuri_lahuniak, iryna_lahuniak).
+married(ihor_kobyk, maria_kobyk).
+married(ivan_konanets, oksana_konanets).
+
+% parent(x, y) - x is parent of y
+parent(andriy_fulmes, ivan_fulmes).
+parent(andriy_fulmes, maria2_loza).
+parent(anna_fulmes, ivan_fulmes).
+parent(anna_fulmes, maria2_loza).
+
+parent(ivan_loza, mykhailo_loza).
+parent(ivan_loza, stepan_loza).
+parent(ivan_loza, svitlana_luhovska).
+parent(maria_loza, mykhailo_loza).
+parent(maria_loza, stepan_loza).
+parent(maria_loza, svitlana_luhovska).
+
+parent(mykhailo_loza, yuri_loza).
+parent(mykhailo_loza, liubov_kravets).
+parent(maria2_loza, yuri_loza).
+parent(maria2_loza, liubov_kravets).
+
+parent(stepan_loza, svitlana_dilna).
+parent(stepan_loza, stepan2_loza).
+parent(olha_loza, svitlana_dilna).
+parent(olha_loza, stepan2_loza).
+
+parent(vitaly_dilnyi, vira_dilna).
+parent(vitaly_dilnyi, diana_dilna).
+parent(vitaly_dilnyi, olha_dilna).
+parent(svitlana_dilna, vira_dilna).
+parent(svitlana_dilna, diana_dilna).
+parent(svitlana_dilna, olha_dilna).
+
+parent(stepan2_loza, artem_loza).
+parent(stepan2_loza, dmytro_loza).
+parent(stepan2_loza, oleh_loza).
+parent(maria3_loza, artem_loza).
+parent(maria3_loza, dmytro_loza).
+parent(maria3_loza, oleh_loza).
+
+parent(vasyl_luhovsly, natalia_klishevska).
+parent(vasyl_luhovsly, yuri_luhovsky).
+parent(svitlana_luhovska, natalia_klishevska).
+parent(svitlana_luhovska, yuri_luhovsky).
+
+parent(dmytro_klishevsky, natalia2_klishevska).
+parent(dmytro_klishevsky, volodymyr_klishevsky).
+parent(natalia_klishevska, natalia2_klishevska).
+parent(natalia_klishevska, volodymyr_klishevsky).
+
+parent(yuri_luhovsky, demian_luhovsky).
+parent(yuri_luhovsky, kostiantyn_luhovsky).
+parent(tetiana_luhovska, demian_luhovsky).
+parent(tetiana_luhovska, kostiantyn_luhovsky).
+
+parent(ahafiy_kravets, myacheslav_kravets).
+parent(maria_kravets, myacheslav_kravets).
+
+parent(andriy2_fulmes, stephania_fulmes).
+parent(andriy2_fulmes, sofia_kravets).
+parent(anna2_fulmes, stephania_fulmes).
+parent(anna2_fulmes, sofia_kravets).
+
+parent(myacheslav_kravets, bohdan_kravets).
+parent(myacheslav_kravets, ivan_kravets).
+parent(myacheslav_kravets, maria_kobyk).
+parent(myacheslav_kravets, oksana_konanets).
+parent(sofia_kravets, bohdan_kravets).
+parent(sofia_kravets, ivan_kravets).
+parent(sofia_kravets, maria_kobyk).
+parent(sofia_kravets, oksana_konanets).
+
+parent(bohdan_kravets, maria2_kravets).
+parent(bohdan_kravets, olha_kravets).
+parent(liubov_kravets, maria2_kravets).
+parent(liubov_kravets, olha_kravets).
+
+parent(ivan_kravets, iryna_lahuniak).
+parent(halyna_kravets, iryna_lahuniak).
+
+parent(yuri_lahuniak, roman_lahuniak).
+parent(iryna_lahuniak, roman_lahuniak).
+
+parent(ihor_kobyk, ivan_kobyk).
+parent(maria_kobyk, ivan_kobyk).
+
+parent(ivan_konanets, taras_konanets).
+parent(ivan_konanets, roman_konanets).
+parent(oksana_konanets, taras_konanets).
+parent(oksana_konanets, roman_konanets).
+
+/* Rules */
+child(Child, Parent):- parent(Parent, Child).
+daughter(Daughter, Parent):- parent(Parent, Daughter), female(Daughter).
+son(Son, Parent):- parent(Parent, Son), male(Son).
+
+mother(Mother, Child):-  parent(Mother, Child), female(Mother).
+father(Father, Child):- parent(Father, Child), male(Father).
+
+mother_inlow(Mother, Child):- married(Child, Women), mother(Mother, Women).
+mother_inlow(Mother, Child):- married(Man, Child), mother(Mother, Man).
+father_inlow(Father, Child):- married(Child, Women), father(Father, Women).
+father_inlow(Father, Child):-  married(Man, Child), father(Father, Man).
+
+siblings(Sibling1, Sibling2):- mother(Mother, Sibling2), mother(Mother, Sibling1), father(Father, Sibling2), father(Father, Sibling1), not(Sibling1 = Sibling2).
+
+brother(Brother, Sibling):- siblings(Brother, Sibling), male(Brother).
+sister(Sister, Sibling):- siblings(Sister, Sibling), female(Sister).
+
+aunt(Aunt, Nephew):- sister(Aunt, Parent), parent(Parent, Nephew).
+uncle(Uncle, Nephew):- brother(Uncle, Parent), parent(Parent, Nephew).
+nephew(Nephew, Aunt):- siblings(Aunt, Parent), son(Nephew, Parent).
+niece(Niece, Aunt):- siblings(Aunt, Parent), daughter(Niece, Parent).
+
+cousin(Cousin1, Cousin2) :- parent(Parent1, Cousin1), parent(Parent2, Cousin2), siblings(Parent1, Parent2), \+siblings(Cousin1, Cousin2), \+Cousin1 = Cousin2.
+
+grandparent(GrandParent, Person):- parent(Parent, Person), parent(GrandParent, Parent).
+grandchild(GrandChild, GrandParent):- grandparent(GrandParent, GrandChild).
+grandmother(Grandmother, Person):- grandparent(Grandmother, Person), female(Grandmother).
+grandfather(Granfather, Person):- grandparent(Granfather, Person), male(Granfather).
+
+ancestor(Person, Ancestor):- parent(Ancestor, Person).
+ancestor(Person, Ancestor):- parent(Parent, Person), ancestor(Parent, Ancestor).
+
+relative(Person1, Person2):- ancestor(Person1, Ancestor), ancestor(Person2, Ancestor).
+
+relative(Person1, Person2):- ancestor(Person1, Person2).
+relative(Person1, Person2):- ancestor(Person2, Person1).
+
+relative(Person1, Person2):- married(Person1, Person2).
+relative(Person1, Person2):- married(Person2, Person1).
+
+in_lows(Person, Relative_inlow):- married(Man, Person), relative(Man, Relative_inlow).
+in_lows(Person, Relative_inlow):- married(Person, Man), relative(Man, Relative_inlow).
+
+/* Queries */
+% Знайти всіх дітей Марії Лози
+% parent(maria_loza, Child).
+
+% Знайти всіх дочок Андрія Фульмеса
+% daughter(Daughter, andriy_fulmes).
+
+% Знайти всіх дітей Світлани Луговської та Василя Луговського:
+% parent(svitlana_luhovska, Child), parent(vasyl_luhovsly, Child).
+
+% Знайти всіх дітей, у яких батько - Михайло Лоза
+% father(Father, Child), Father = mykhailo_loza.
+
+% Знайти всіх бабусь Ольги Кравець
+% grandmother(Grandmother, olha_kravets).
+
+% Знайти всіх сестер Віри Дільної
+% sister(Sister, vira_dilna).
+
+% Знайти всіх дядьків Любові Кравець
+% uncle(Uncle, liubov_kravets).
+
+% Знайти всіх тіток Ірини Лагуняк:
+% aunt(Aunt, iryna_lahuniak).
+
+% Знайти всіх брати та сестер Оксани Конанець
+% siblings(Sibling, oksana_konanets).
+
+% Знайти всіх прапрабабусь і прапрадідусів Ольги Кравець
+% grandparent(Grandparent, olha_kravets).
+
+% Знайти всіх праправнуків та праправнучок Софії Кравець
+% grandchild(Grandchild, sofia_kravets).
+
+% Знайти всіх родичів Василя Луговського
+% relative(Person, vasyl_luhovsly).
+
+% Знайти всіх батьків, які є свекрами (батьками чоловіка) Галини Кравець
+% father_inlow(Father, halyna_kravets).
+
+% Знайти всіх тіток і дядьків Романа Конанця
+% aunt(Aunt, roman_konanets); uncle(Uncle, roman_konanets).
+
+% Знайти всіх племінниць Юрія Лози
+% niece(Person, yuri_loza).
+ 
+% Знайти всіх двоюрідних братів і сестер Ірини Лагуняк
+% cousin(Person, iryna_lahuniak).
