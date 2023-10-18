@@ -1,0 +1,51 @@
+belong(X, [ X | _]).
+belong(X, [ _ | Tail]) :- belong(X, Tail).
+
+%?- write(first),belong(b,[a,b,c]),nl.
+%?- write(second),belong(b,[a,[b,c]]),nl.
+%?- write(third),belong([b,c],[a,[b,c]]),nl.
+%?- write(fourth),belong(b,[a | [b,c]]),nl.
+%?- nl, belong(X,[a,b,c]), write(X).
+
+concat([ ], L, L ).
+concat( [X | L1], L2, [X | L3]) :- concat( L1, L2, L3).
+
+?- concat([1,2],[a,b,c],R), write(R).
+?- concat(A,B,[a,b,c,d,e]), write('A='), write(A),
+     write("  B="), write(B), nl.
+
+?- Year=[jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
+   concat(Before, [sep | After], Year),
+   write(Before), nl, write(After), nl.
+
+delete(X, [X | Tail], Tail).
+delete(X, [Head | Tail], [Head |Shorter]) :-
+     delete(X, Tail, Shorter).
+
+?- delete(a,[b,a,c],L),write(L).
+
+insert(X, Shorter, Longer) :- delete(X, Longer, Shorter).
+
+length([ ], 0).
+length([ _ | Tail], Len) :- length(Tail, K), Len is K + 1.
+?- Year=[jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
+   length(Year, M), write(M), nl.
+
+sum([], 0). 
+sum([H|T], S) :- sum(T, S_T), S = S_T + H.
+?- sum([1,2,3], S), write(S), nl.
+
+sum_list([],S,S).  % if the list became empty then the accumulator held the sum
+sum_list([H|T],N,S) :- N_T = H + N, sum_list(T,N_T,S). 
+sum_list(L,S) :- sum_list(L, 0, S).
+
+?- sum_list([1,2,3], S), write(S), nl.
+
+%even(L)
+%even(L) :- length(L, S), S // 2 =:= S / 2.
+
+even([]).
+even([_,_ | Tail]) :- even(Tail).
+odd([_|Tail]) :- even(Tail).
+
+

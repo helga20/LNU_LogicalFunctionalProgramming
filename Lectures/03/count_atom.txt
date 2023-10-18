@@ -1,0 +1,21 @@
+%count(A,L,N): list L contains atom A N times
+count(_,[],0).
+count(A,[A|T],N):-!,
+  count(A,T,L), N is L+1.
+count(A,[_|T],N):-
+  count(A,T,N).
+
+?- count(a,[a,b,c,X,Y],N), write(N), nl.
+?- count(b,[a,b,c,X,Y],N), write(N), nl.
+?- count(a,[a,b,c,X,Y],N), write(N), nl, count(b,[a,b,c,X,Y],M), write(M), nl.
+
+atom(X):- not(var(X)).
+count_atom(_,[],0).
+count_atom(A,[B|T],N):- atom(B),A?=B,!, %are X and Y unifyable?
+  count_atom(A,T,L), N is L+1.
+count_atom(A,[_|T],N):-
+  count_atom(A,T,N).
+
+?- count_atom(a,[a,b,c,X,Y],N), write(N), nl.
+?- count_atom(b,[a,b,c,X,Y],N), write(N), nl.
+?- count_atom(a,[a,b,c,X,Y],N), write(N), nl, count_atom(b,[a,b,c,X,Y],M), write(M), nl.

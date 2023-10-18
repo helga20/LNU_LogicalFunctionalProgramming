@@ -1,0 +1,10 @@
+move(L,R) :- write(L),write('-->'),write(R),nl.
+
+moveTower(L,R,W,1) :- move(L,R).
+moveTower(L,R,W,N) :-
+    N1 is N - 1,
+    moveTower(L,W,R,N1),
+    move(L,R),
+    moveTower(W,R,L,N1).
+
+?- moveTower(left,right,middle,5).

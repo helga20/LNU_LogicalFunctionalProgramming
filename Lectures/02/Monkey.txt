@@ -1,0 +1,10 @@
+move(state(center,onBox,center,hasNot),grab,state(center,onBox,center,has)).
+move(state(X,onFloor,X,hasNot),jump,state(X,onBox,X,hasNot)).
+move(state(X,onFloor,X,hasNot),push(X,Y),state(Y,onFloor,Y,hasNot)).
+move(state(X,onFloor,T,hasNot),go(X,Y),state(Y,onFloor,T,hasNot)).
+
+start(state(atDoor, onFloor, atWindow, hasNot)).
+goal(state(_,_,_,has),[]).
+goal(S1,R):-move(S1,Act,S2),goal(S2,L),R=[Act|L].
+
+?-start(S),goal(S,R),write(R).
