@@ -1,0 +1,54 @@
+(defun SimpsonIntegrationLoop (a b n f)
+    (setq h (/ (- b a) n))
+    (setq integral (+ (FUNCALL f b) (FUNCALL f a)))
+    (setq i 1)
+    (loop while (< i n)
+        do (setq k (+ a (* i h)))
+         (cond 
+          ((evenp i) 
+              (setq integral (+ integral (* 2 (FUNCALL f k)))))
+          ((oddp i) 
+              (setq integral (+ integral (* 4 (FUNCALL f k))))))
+         (setq i (+ i 1))
+    )
+
+  (setq integral (* integral (/ h 3)))
+  integral
+)
+
+(defun IntegrationRecursion (a b n f)
+    (COND ((= n 0) 0.0)
+          ((SETQ H (/ (- B A) N))
+          (cond 
+                ((evenp n) 
+                    (+ (IntegrationRecursion (+ a h) b (- n 1) f) (* 2 (FUNCALL f a))))
+                ((oddp n) 
+                    (+ (IntegrationRecursion (+ a h) b (- n 1) f) (* 4 (FUNCALL f a))))
+          )
+          )
+    )
+)
+
+(defun SimpsonIntegrationRecursion (a b n f)
+    (setq h (/ (- b a) n))
+    (setq integral (+ (FUNCALL f b) (FUNCALL f a)))
+    (setq integral (+ integral (IntegrationRecursion (+ a h) b (- n 1) f)))
+    (setq integral (* integral (/ h 3)))
+    integral
+)
+
+(DEFUN accuracy_integration (type_of_integration f a b eps)
+        (setq n 5)
+        (setq n2 10)
+        (loop 
+            (setq in (funcall type_of_integration a b n f))
+            (setq in2 (FUNCALL type_of_integration a b n2 f))
+            (setq n n2)
+            (setq n2 (* 2 n2))
+        (when (< (/ (abs (- in in2)) 15) eps) (return in2))))
+
+(print(accuracy_integration 'SimpsonIntegrationLoop (LAMBDA (X)(sin x)) 0 5 0.001))
+(print(accuracy_integration 'SimpsonIntegrationRecursion (LAMBDA (X)(sin x)) 0 5 0.001))
+
+(print(accuracy_integration 'SimpsonIntegrationLoop (LAMBDA (X) (- (* X X) 1)) 0 5 0.001))
+(print(accuracy_integration 'SimpsonIntegrationRecursion (LAMBDA (X) (- (* X X) 1)) 0 5 0.001))
