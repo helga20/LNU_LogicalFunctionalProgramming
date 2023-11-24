@@ -1,0 +1,58 @@
+
+
+(defun incr (a)
+	(+ 1 a)
+)
+
+(print (mapcar 'incr '(1 2 3 4 5)))  ; інкрементуємо завдяки mapcar та використовуючи функцію
+;---------------------------------------------
+
+(print (mapcar (lambda (x) (+ x 1)) '(1 2 3 4 5))) ;інкрементуємо завдяки mapcar та використовуючи лямбда
+
+;---------------------------------------------
+(print (mapcar (lambda (x y) (max x y)) '(10 2 3) '(2 3 40))) ;знаходимо максимуми через mapcar та лямбда
+
+;---------------------------------------------
+(defun is_prime (n) 
+    (setq flag NIL)
+    (loop for i from 2 to (- n 1)
+          do (cond ( (= (mod n i) 0) (setq flag T))))
+    (not flag))
+
+
+(print (EVERY (lambda (x) (is_prime x)) '(3 5 7 11 17))) ;перевіряємо чи всі числа прості використовуючи EVERY
+;---------------------------------------------
+
+(defun is_atom (s) (Cond ((atom s) 1) (0)) )
+(defun atoms_amount (s) (apply '+ (mapcar 'is_atom s))) ; обчислення кількості простих атомів використовуючи mapcar і функцію
+
+(print(atoms_amount '(1 2 3 4 5 'hyff)))
+;---------------------------------------------
+(defun atoms_amount (s) (apply '+ (mapcar (lambda(x) (Cond ((atom x) 1) (0))) s)) ) ; обчислення кількості простих атомів використовуючи mapcar і лямбда
+
+(print(atoms_amount '(1 2 3 4 5 'hyff)))
+;---------------------------------------------
+
+(DEFUN Fibbomachi-sequence (A B)
+ (FUNCTION (LAMBDA () (SETQ temp A) (SETQ A (+ A B)) (SETQ B temp)))
+)
+;генератор послідовності чисел Фіббоначчі
+(SETQ NEXT-Fibos (Fibbomachi-sequence 0 1))
+
+(loop for i from 1 to 10
+          do (print (FUNCALL NEXT-Fibos)))
+
+;---------------------------------------------
+(DEFUN geom_progr (b1 q) 
+(FUNCTION (LAMBDA (n) (loop for i from 1 to (- n 1)
+                        do (SETQ b1 (* b1 q))) b1)
+                        
+))
+
+(setq geom (geom_progr 1 2))
+(print (FUNCALL geom 7));Фабрика геометричної прогресії
+
+
+
+
+
